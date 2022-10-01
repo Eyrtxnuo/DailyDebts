@@ -5,3 +5,4 @@ Gruppo: Bossi, Ginisi Maggiolini, Pirovano
 
 Idee:
  - gestione debiti
+ - gestore sviluppo progetti di programmazione
