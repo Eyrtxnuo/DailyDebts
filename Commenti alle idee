@@ -1,0 +1,33 @@
+PRIMA PROPOSTA
+
+Gestione dei debiti:
+
+Problema -> dividere le varie spese che si condividono con singoli amici o in un gruppo di amici
+
+(es. ad una cena non si può dividere il conto e un utente decide di pagare per tutti ma gli altri non hanno i soldi esatti da dare all'utente che ha pagato per tutti).
+
+Soluzione -> un sito/app che tenga traccia di debiti fra singoli e gruppi.
+
+Strumenti -> VSCode (HTML, css, javascript, php, MySQL) MySQL (server).
+
+VALUTAZIONE
+
+Idea valida, ma già presente nel mercato con diverse soluzioni.
+Idea sembra realizzabile nei tempi stabiliti.
+Se non fatta in modo accurato e preciso, applicazione può risultare inutile a confronto con quelle già presenti in rete.
+In internet sono già presenti diverse soluzioni per esempio: Splitwise, Settle up, Tricount.
+
+ 
+
+SECONDA PROPOSTA
+
+gestore sviluppo progetti di programmazione:
+
+Applicazione/sito per gestire le scadenze dei progetti informatici a gruppi, con i file da modificare, gli obbiettivi (con scadenza), e le classe/funzioni assegnate a ogni componente.
+
+VALUTAZIONE
+
+Applicazione fattibile, ma di scarsa Originalità, idea poco innovativa.
+Sono presenti innumerevoli soluzioni in rete.
+In caso di sviluppo l’applicazione sarebbe di basso utilizzo rispetto alle migliori e più utilizzate presenti in rete.
+Esempi di applicazioni che contengono questa funzionalità sono: GitHub, Agora, Calendario.
