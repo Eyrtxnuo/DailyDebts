@@ -2,6 +2,18 @@
 Progetto scolastico a gruppi
 
 Gruppo: Bossi, Ginisi, Maggiolini, Pirovano
+
+
+#Progetto scelto. GESTIONE DEI DEBITI
+
+
+
+
+
+
+
+
+Progetti:
  
  Gestione dei debiti:
 
