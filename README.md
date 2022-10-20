@@ -8,8 +8,8 @@ Gruppo: Bossi, Ginisi, Maggiolini, Pirovano
 
 
 	Problema -> dividere le varie spese che si condividono con singoli amici o in un gruppo di amici  
-		(es. ad una cena non si puo dividere il conto e un utente decide di pagare per tutti ma gli altri non hanno i soldi esatti da dare 
-		all'utente che ha pagato per tutti).
+		(es. ad una cena non si puo dividere il conto e un utente decide di pagare per tutti ma 
+		gli altri non hanno i soldi esatti da dare all'utente che ha pagato per tutti).
 		
 	Soluzione -> un sito/app che tenga traccia di debiti fra singoli e gruppi.
 
