@@ -18,3 +18,7 @@ RewriteRule ^(.*)$ index.php?$1 [L,QSA]
 
 ErrorDocument 403 /index.php
 ErrorDocument 500 /index.php
+
+SetEnv DB_USERNAME ADMIN
+SetEnv DB_PASSWORD c6!RDMX1LSb@7R
+SetEnv DB_DATABASE debiti_high
