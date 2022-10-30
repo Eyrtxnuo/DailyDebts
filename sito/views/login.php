@@ -1,56 +1,83 @@
-<form method="POST">
-    <input type="text" name="username" required minlength="6">
-    <input type="password" name="password" required minlength="8">
-    <input type="submit" value="SUBMIT">
-</form>
-<?php 
+<?php
+// We need to use sessions, so you should always start sessions using the below code.
+session_start();
+// If the user is not logged in redirect to the login page...
+if ($_SESSION['loggedin'] == TRUE) {
+	header('Location: /dashboard');
+	exit();
+}
+
+// Change this to your connection info.
+$DATABASE_USER = getenv("DB_USERNAME");
+$DATABASE_PASS = getenv("DB_PASSWORD");
+$DATABASE_NAME = getenv("DB_DATABASE");
+
+
 try {
+    $conn = oci_connect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+    
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    if($username == NULL || $password == NULL){
-        return;
+    if($username == NULL || $password == NULL || !isset($_POST['username'], $_POST['password'])){
+        if($username == NULL Xor $password == NULL){
+            $loginerr = 'Please fill both the username and password fields!';
+        }
+        goto document;
     }
-
-    $conn = oci_connect('ADMIN','c6!RDMX1LSb@7R', 'debiti_high');
-    $stid = oci_parse($conn, 'SELECT * FROM "Users" WHERE Username = :usrn');
+    
+    $stid = oci_parse($conn, 'SELECT ID, PSSW_HASH FROM "Users" WHERE Username = :usrn');
     
     oci_bind_by_name($stid, ':usrn', $username);
     oci_execute($stid);
     oci_fetch($stid);
-    
-    
 
     if (password_verify($password,oci_result($stid, 'PSSW_HASH'))) {
-        echo('Password is valid!');
-        header ( 'Location: /dashboard' );
+        
+        #header ( 'Location: /dashboard' );
+        session_regenerate_id();
+        $_SESSION['loggedin'] = TRUE;
+		$_SESSION['name'] = $_POST['username'];
+        header('Location: /dashboard');
     } else {
-        echo('Invalid password.');
+        $loginerr = 'Invalid password.';
     }
-        echo("<br>");
         
 
     oci_free_statement($stid);
 
 } catch(Exception $e) {
-    echo $e->getMessage();
+    $loginerr = ('Failed to connect to Database. ' . $e->getMessage());
+    goto document;
 }
-        
- /*
- for($i=0;$i<1;$i++){
-    $old_hash = $password_hash;
-    $password_hash = password_hash($password, PASSWORD_ARGON2ID, ['memory_cost' => 4096, 'time_cost' => 8, 'threads' => 1]);
-    if($old_hash == $password_hash){
-        echo("whaat?");
-    }
-}
- echo($password_hash);
- echo('<br>'.$password.'<br>');
- if (password_verify($password,'$argon2id$v=19$m=4096,t=16,p=4$NWRDQmpHZWJ0eVYwQ3lXRg$Hv3ITWot6McKYqWSfytTMA')) {
-    echo('Password is valid!');
-} else {
-    echo('Invalid password.');
-}
-    echo("<br>end");
-    */
+       
+document:
  ?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Login</title>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+        <link rel="stylesheet" href="/css/style.css">
+	</head>
+	<body>
+		<div class="login">
+			<h1>Login</h1>
+			<form action="/login" method="post">
+				<label for="username">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="username" placeholder="Username" id="username" value="<?= $_POST['username']  ?>"  required>
+				<label for="password">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="password" name="password" placeholder="Password" id="password" >
+                <label class="error" id="login-error">  
+                    <?= $loginerr ?>
+				</label>
+				<input type="submit" value="Login">
+			</form>
+		</div>
+	</body>
+</html>
