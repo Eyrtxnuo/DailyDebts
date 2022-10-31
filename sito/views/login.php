@@ -2,7 +2,7 @@
 // We need to use sessions, so you should always start sessions using the below code.
 session_start();
 // If the user is not logged in redirect to the login page...
-if ($_SESSION['loggedin'] == TRUE) {
+if (isset($_SESSION['loggedin']) And $_SESSION['loggedin'] == TRUE) {
 	header('Location: /dashboard');
 	exit();
 }
@@ -25,8 +25,8 @@ try {
         }
         goto document;
     }
-    
-    $stid = oci_parse($conn, 'SELECT ID, PSSW_HASH FROM "Users" WHERE Username = :usrn');
+
+    $stid = oci_parse($conn, 'SELECT PSSW_HASH FROM "Users" WHERE Username = :usrn');
     
     oci_bind_by_name($stid, ':usrn', $username);
     oci_execute($stid);
@@ -40,7 +40,7 @@ try {
 		$_SESSION['name'] = $_POST['username'];
         header('Location: /dashboard');
     } else {
-        $loginerr = 'Invalid password.';
+        $loginerr = 'Invalid username or password.';
     }
         
 
@@ -58,13 +58,13 @@ document:
 	<head>
 		<meta charset="utf-8">
 		<title>Login</title>
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
         <link rel="stylesheet" href="/css/style.css">
 	</head>
 	<body>
 		<div class="login">
 			<h1>Login</h1>
-			<form action="/login" method="post">
+			<form method="post">
 				<label for="username">
 					<i class="fas fa-user"></i>
 				</label>
