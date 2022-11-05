@@ -14,9 +14,8 @@ $DATABASE_NAME = getenv("DB_DATABASE");
 try {
     $conn = oci_connect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
     
-    // We don't have the password or email info stored in sessions so instead we can get the results from the database.
     $stid = oci_parse($conn,'SELECT NAME, SURNAME FROM "Users" WHERE Username = :usrn');
-    // In this case we can use the account ID to get the account info.
+	
     oci_bind_by_name($stid, ':usrn', $_SESSION['name']);
     oci_execute($stid);
     oci_fetch($stid);
@@ -33,7 +32,7 @@ try {
 	<head>
 		<meta charset="utf-8">
 		<title>Profile Page</title>
-		<link href="/css/style.css" rel="stylesheet" type="text/css">
+		<link href="/resources/css/base/style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body class="loggedin">

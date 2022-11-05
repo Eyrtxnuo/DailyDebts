@@ -12,7 +12,7 @@ if (!isset($_SESSION['loggedin'])) {
 	<head>
 		<meta charset="utf-8">
 		<title>Home Page</title>
-		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/resources/css/base/style.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body class="loggedin">

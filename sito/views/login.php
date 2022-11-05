@@ -59,7 +59,7 @@ document:
 		<meta charset="utf-8">
 		<title>Login</title>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
-        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/resources/css/base/style.css">
 	</head>
 	<body>
 		<div class="login">
