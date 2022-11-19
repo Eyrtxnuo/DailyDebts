@@ -68,7 +68,7 @@ document:
 				<label for="username">
 					<i class="fas fa-user"></i>
 				</label>
-				<input type="text" name="username" placeholder="Username" id="username" value="<?= $_POST['username']  ?>"  required>
+				<input type="text" name="username" placeholder="Username" id="username" required>
 				<label for="password">
 					<i class="fas fa-lock"></i>
 				</label>
