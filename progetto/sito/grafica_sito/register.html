@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Register</title>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
+        <link rel="stylesheet" href="/resources/css/base/style.css">
+	</head>
+	<body>
+        <img src="..\resources\immagini\LogoNoBG.png">
+		<div class="login">
+			<h1>Register</h1>
+			<form method="post">
+				<label for="username" class="field">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="username" placeholder="Username" id="username" required>
+				<label for="Name" class="field">
+                    <i class="fa-solid fa-n"></i>
+				</label>
+				<input type="text" name="name" placeholder="Name" id="name" required>
+				<label for="Surname" class="field">
+                    <i class="fa-solid fa-s"></i>
+				</label>
+				<input type="text" name="surname" placeholder="Surname" id="surname" required>
+				<label for="password" class="field">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="password" name="password" placeholder="Password" id="password" >
+                <label class="error" id="login-error">  
+                    ERRORE
+				</label>
+				<input type="submit" value="Register">
+			</form>
+		</div>
+	</body>
+</html>

@@ -69,6 +69,7 @@ document:
         <link rel="stylesheet" href="/resources/css/base/style.css">
 	</head>
 	<body>
+        <img src="..\resources\immagini\LogoNoBG.png">
 		<div class="login">
 			<h1>Register</h1>
 			<form method="post">

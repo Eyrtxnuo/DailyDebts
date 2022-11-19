@@ -6,17 +6,19 @@
     -moz-osx-font-smoothing: grayscale;
 }
 body {
-    background-color: #435165;
+    background-color: rgb(59, 59, 59);
 }
 .login {
     width: 400px;
-    background-color: #ffffff;
+    background-color: rgb(195, 195, 195);
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
     margin: 100px auto;
+    border-radius: 2%;
+    overflow: hidden;
 }
 .login h1 {
     text-align: center;
-    color: #5b6574;
+    color: rgb(59, 59, 59);
     font-size: 24px;
     padding: 20px 0 20px 0;
     border-bottom: 1px solid #dee0e4;
@@ -33,29 +35,35 @@ body {
     align-items: center;
     width: 50px;
     height: 50px;
-    background-color: #3274d6;
+    background-color: rgb(255, 204, 87);
     color: #ffffff;
 }
+
+.login form input{
+    background-color: #fff;
+}
+
 .login form input[type="password"], .login form input[type="text"] {
     width: 310px;
     height: 50px;
-    border: 1px solid #dee0e4;
+    border: 2px solid rgb(255, 204, 87);
     margin-bottom: 20px;
     padding: 0 15px;
 }
+
 .login form input[type="submit"] {
     width: 100%;
     padding: 15px;
    margin-top: 20px;
-    background-color: #3274d6;
+   background-color: rgb(255, 204, 87);
     border: 0;
     cursor: pointer;
     font-weight: bold;
-    color: #ffffff;
+    color: rgb(59, 59, 59);
     transition: background-color 0.2s;
 }
 .login form input[type="submit"]:hover {
-  background-color: #2868c7;
+  background-color: rgb(255, 204, 87);
     transition: background-color 0.2s;
 }
 .navtop {
@@ -131,4 +139,21 @@ body.loggedin {
     color: red;
     font-weight: bold;
     width: fit-content;
+}
+
+.login form label.field {
+    color: rgb(59, 59, 59);
+}
+
+a{
+    color: rgb(255, 204, 87);
+}
+
+a:hover{
+    color: rgb(225, 174, 57);
+}
+
+.center{
+    display: inline-block;
+    align-content: center;
 }
