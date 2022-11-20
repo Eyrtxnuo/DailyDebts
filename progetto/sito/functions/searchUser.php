@@ -9,7 +9,7 @@ if(strlen($key)<3){
 }
 $key = "%".$key."%";
 try {
-    $conn = oci_connect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+    $conn = oci_pconnect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
     
     $stid = oci_parse($conn,'SELECT USERNAME FROM "Users" WHERE Username LIKE :key COLLATE BINARY_CI');
     

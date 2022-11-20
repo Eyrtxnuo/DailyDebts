@@ -33,7 +33,14 @@ try {
 }
 
 ?>
-
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8">
+	<title>Group</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
+</head>
+<body>
 Invite code: <?= $groupView ?><br>
 Group name: <?= oci_result($stid, "GROUPNAME") ?><br>
 Description: <?= oci_result($stid, "DESCRIPTION") ?><br>
@@ -50,3 +57,22 @@ Members:
 	}
 ?>
 </ul>
+<button onclick="window.location.href='/addDebt?group=<?= $groupView ?>'">Aggiungi debito</button>
+<br>
+<br>
+Storico debiti:
+<ul>
+<?php
+	$stid = oci_parse($conn,'SELECT * FROM "DEBTS" debt INNER JOIN "GROUPS" gr ON GROUP_ID = gr.ID WHERE CODE = :code');
+		
+	oci_bind_by_name($stid, ':code', $groupView);
+	oci_execute($stid);
+	while(($res = oci_fetch_array($stid, OCI_ASSOC))!=false){
+		echo("<li>".$res['DEBTOR']." <i class='fa-solid fa-arrow-right'></i> ".$res['VALUE']."€ <i class='fa-solid fa-arrow-right'></i> ". $res['CREDITOR'].": ".$res["DESCRIPTION"]."</li>");
+	}
+?>
+</ul>
+
+
+</body>
+<html>

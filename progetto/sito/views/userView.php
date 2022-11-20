@@ -41,3 +41,38 @@ try {
 Username: <?= $userView ?><br>
 Name: <?= oci_result($stid, "NAME") ?><br>
 Surname: <?= oci_result($stid, "SURNAME") ?><br>
+
+<br>
+<button onclick="window.location.href='/addDebt?user=<?= $userView ?>'">Aggiungi debito</button>
+<br>
+
+Totale debiti:  <?php
+    $stid = oci_parse($conn,'SELECT GETUSERDEBT(:usrn, :other) FROM "DUAL"');
+    oci_bind_by_name($stid, ':usrn', $_SESSION['name']);
+    oci_bind_by_name($stid, ':other', $userView);
+    oci_execute($stid);
+    print_r(oci_fetch_array($stid)[0]);
+?>
+
+<br><br>
+
+Storico debiti:
+<ul>
+<?php
+
+$stid = oci_parse($conn,'
+(SELECT -VALUE as VAL,ID,DESCRIPTION,CREATED_AT FROM "DEBTS" WHERE DEBTOR = :usrn AND CREDITOR = :other AND GROUP_ID IS NULL)
+UNION  
+(SELECT VALUE as VAL,ID,DESCRIPTION,CREATED_AT FROM "DEBTS"  WHERE DEBTOR = :other AND CREDITOR = :usrn AND GROUP_ID IS NULL)
+ORDER BY CREATED_AT DESC
+');
+oci_bind_by_name($stid, ':usrn', $_SESSION['name']);
+oci_bind_by_name($stid, ':other', $userView);
+oci_execute($stid);
+while($res = oci_fetch_array($stid)){
+    echo("<li>".$res["VAL"])."€: ".$res["DESCRIPTION"]."</li>";
+}
+print_r(oci_error($stid));
+
+?>
+<ul>

@@ -24,4 +24,28 @@ function _UTILS_getUser($username){
     return false;
 }
 
+function _UTILS_getGroupByCode($code){
+    $DATABASE_USER = getenv("DB_USERNAME");
+    $DATABASE_PASS = getenv("DB_PASSWORD");
+    $DATABASE_NAME = getenv("DB_DATABASE");
+    
+    try {
+        $conn = oci_pconnect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+        
+        $stid = oci_parse($conn,'SELECT * FROM "GROUPS" WHERE CODE = :code');
+        
+        oci_bind_by_name($stid, ':code', $code);
+        oci_execute($stid);
+        $user = oci_fetch_assoc($stid);
+        
+        oci_free_statement($stid);
+
+        return $user;
+    
+    } catch(Exception $e) {
+        return null;
+    }
+    return null;
+}
+
 ?>

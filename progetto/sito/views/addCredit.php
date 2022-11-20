@@ -20,8 +20,8 @@ if (!isset($_SESSION['loggedin'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/resources/typeahead/jquery.typeahead.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
-    <link rel="stylesheet" href="/resources/css/base/style.ccss">
-    <script >
+    <link rel="stylesheetz" href="/resources/css/base/style.css">
+    <script>
         $(document).ready(function() {
             $.typeahead({
                 input: '.typeahead-Users',
@@ -51,7 +51,7 @@ if (!isset($_SESSION['loggedin'])) {
 
     <div class="window">
         <h1>Aggiungi un credito</h1>
-        <form id="form-Debit" name="form-Debit" method="post" action="/fnct/register_credit" >
+        <form id="form-Debit" name="form-Debit" method="post" action="/fnct/register_credit?<?= isset($_GET["group"])?"group=".$_GET["group"]:"";   ?>" >
             
             <div class="typeahead__container">
                 <div class="typeahead__fieldz">
@@ -59,7 +59,7 @@ if (!isset($_SESSION['loggedin'])) {
                         <label>
                             <i class="fas fa-user"></i>
                         </label>
-                        <input id="search-usrn" class="typeahead-Users" name="user" placeholder="Username" autocomplete="off">
+                        <input id="search-usrn" class="typeahead-Users" name="user" placeholder="Username" autocomplete="off" value=<?= $_GET["user"] ?>>
                     </div>
                     <div class="typeahead__button">
                         
@@ -83,6 +83,8 @@ if (!isset($_SESSION['loggedin'])) {
             <input type="submit" value="Aggiungi">
         </form>
     </div>
+    
 
+        
 </body>
 </html>

@@ -51,7 +51,7 @@ if (!isset($_SESSION['loggedin'])) {
 
     <div class="window">
         <h1>Aggiungi un debito</h1>
-        <form id="form-Debit" name="form-Debit" method="post" action="/fnct/register_debt" >
+        <form id="form-Debit" name="form-Debit" method="post" action="/fnct/register_debt?<?= isset($_GET["group"])?"group=".$_GET["group"]:"";   ?>" >
             
             <div class="typeahead__container">
                 <div class="typeahead__fieldz">
@@ -59,7 +59,7 @@ if (!isset($_SESSION['loggedin'])) {
                         <label>
                             <i class="fas fa-user"></i>
                         </label>
-                        <input id="search-usrn" class="typeahead-Users" name="user" placeholder="Username" autocomplete="off">
+                        <input id="search-usrn" class="typeahead-Users" name="user" placeholder="Username" autocomplete="off" value=<?= $_GET["user"] ?>>
                     </div>
                     <div class="typeahead__button">
                         

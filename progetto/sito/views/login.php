@@ -1,9 +1,13 @@
 <?php
+$redirect = '/dashboard';
+if(isset($_GET['ref'])){
+    $redirect = $_GET['ref']; 
+}
 // We need to use sessions, so you should always start sessions using the below code.
 session_start();
 // If the user is not logged in redirect to the login page...
 if (isset($_SESSION['loggedin']) And $_SESSION['loggedin'] == TRUE) {
-	header('Location: /dashboard');
+	header('Location: '.$redirect);
 	exit();
 }
 
@@ -14,7 +18,7 @@ $DATABASE_NAME = getenv("DB_DATABASE");
 
 
 try {
-    $conn = oci_connect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+    $conn = oci_pconnect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
     
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -38,7 +42,7 @@ try {
         session_regenerate_id();
         $_SESSION['loggedin'] = TRUE;
 		$_SESSION['name'] = $_POST['username'];
-        header('Location: /dashboard');
+        header('Location: '.$redirect);
     } else {
         $loginerr = 'Invalid username or password.';
     }
@@ -61,14 +65,15 @@ document:
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
         <link rel="stylesheet" href="/resources/css/base/style.css">
 	</head>
-	<body>
+    <body>
+        <img src="\resources\immagini\LogoNoBG.png">
 		<div class="login">
 			<h1>Login</h1>
 			<form method="post">
 				<label for="username">
 					<i class="fas fa-user"></i>
 				</label>
-				<input type="text" name="username" placeholder="Username" id="username" required>
+				<input type="text" name="username" placeholder="Username" id="username" value=""  required>
 				<label for="password">
 					<i class="fas fa-lock"></i>
 				</label>
@@ -79,5 +84,6 @@ document:
 				<input type="submit" value="Login">
 			</form>
 		</div>
+        <a href="register.html" class="center">Register</a>
 	</body>
 </html>
