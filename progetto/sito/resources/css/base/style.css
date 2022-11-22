@@ -41,6 +41,25 @@ body {
     color: #ffffff;
 }
 
+.labelForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(255, 204, 87);
+    color: #ffffff;
+}
+
+.inputForm{
+    background-color: #fff;
+    width: 310px;
+    height: 50px;
+    border: 2px solid rgb(255, 204, 87);
+    margin-bottom: 20px;
+    padding: 0 15px;
+}
+
 .login form input{
     background-color: #fff;
 }
@@ -143,7 +162,7 @@ body.loggedin {
     width: fit-content;
 }
 
-.login form label.field {
+.field {
     color: rgb(59, 59, 59);
 }
 
@@ -192,3 +211,9 @@ a:hover{
     color: rgb(19, 19, 19);
 }
 
+p{
+    position: relative;
+    left: 10%;
+    bottom: 0px;
+    color: #c1c4c8;
+}
