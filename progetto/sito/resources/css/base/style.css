@@ -7,6 +7,8 @@
 }
 body {
     background-color: rgb(59, 59, 59);
+    height: auto;
+    width: auto;
 }
 .login {
     width: 400px;
@@ -166,11 +168,20 @@ a:hover{
     background-color: rgb(255, 204, 87);
     margin: 20px;
     border-radius: 5px;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
     color: rgb(59, 59, 59);
+    cursor: pointer;
+}
+
+#btnLog{
+    position: absolute;
+    top: 40%;
+    left: 35%;
+}
+
+#btnReg{
+    position: absolute;
+    top: 40%;
+    right: 35%;
 }
 
 .nero{
@@ -180,3 +191,4 @@ a:hover{
 .nero:hover{
     color: rgb(19, 19, 19);
 }
+
