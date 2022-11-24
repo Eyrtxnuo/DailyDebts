@@ -12,7 +12,7 @@ $DATABASE_NAME = getenv("DB_DATABASE");
 
 
 try {
-    $conn = oci_connect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+    $conn = oci_pconnect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME, 'AL32UTF8');
     
     $stid = oci_parse($conn,'SELECT NAME, SURNAME FROM "Users" WHERE Username = :usrn');
 	
@@ -31,14 +31,14 @@ try {
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Profile Page</title>
+		<title>DailyDebts - Profile</title>
 		<link href="/resources/css/base/style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body class="loggedin">
 		<nav class="navtop">
 			<div>
-				<h1>Website Title</h1>
+				<h1>DailyDebts</h1>
 				<a href="/profile"><i class="fas fa-user-circle"></i>Profile</a>
 				<a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
 			</div>

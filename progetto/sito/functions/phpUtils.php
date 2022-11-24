@@ -6,7 +6,7 @@ function _UTILS_getUser($username){
     $DATABASE_NAME = getenv("DB_DATABASE");
     
     try {
-        $conn = oci_pconnect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+        $conn = oci_pconnect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME, 'AL32UTF8');
         
         $stid = oci_parse($conn,'SELECT USERNAME,NAME,SURNAME,ID FROM "Users" WHERE Username = :usrn');
         
@@ -30,7 +30,7 @@ function _UTILS_getGroupByCode($code){
     $DATABASE_NAME = getenv("DB_DATABASE");
     
     try {
-        $conn = oci_pconnect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+        $conn = oci_pconnect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME, 'AL32UTF8');
         
         $stid = oci_parse($conn,'SELECT * FROM "GROUPS" WHERE CODE = :code');
         
@@ -46,6 +46,15 @@ function _UTILS_getGroupByCode($code){
         return null;
     }
     return null;
+}
+
+function _UTILS_getStringBetween($str,$from,$to, $withFromAndTo = false)
+{
+   $sub = substr($str, strpos($str,$from)+strlen($from),strlen($str));
+   if ($withFromAndTo)
+     return $from . substr($sub,0, strrpos($sub,$to)) . $to;
+   else
+     return substr($sub,0, strrpos($sub,$to));
 }
 
 ?>

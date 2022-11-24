@@ -1,45 +1,34 @@
-<a href="/login">Login</a><br>
-<a href="/register">Register</a><br>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
+    <link rel="stylesheet" href="/resources/css/base/style.css">
+</head>
 
+<body style="height:100vh; max-height: 100vh; margin:0; ">
+    <img src="..\resources\immagini\LogoNoBG.png">
+    <div style=" 	
+            display: flex;
+            flex-direction: column; 	
+            flex-wrap: wrap;        	
+            justify-content: center;	
+            align-items: center;">
+        <div style="margin:auto">
+            <div id="btnLog" >
+                <!-- <p>hai gia un account:</p> -->
+                
+                <a href="/login"><button class="btnHome">Login</button></a>
+            </div>
+            <div id="btnReg">
+                <!-- <p>non hai ancora un account:</p> -->
+                <a href="/register"><button class="btnHome">Register</button></a>
+            </div>
+        </div>
+    </div>
+</body>
 
-<?php
-/* 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-try {
-    $conn = oci_connect(getenv("DB_USERNAME"),getenv("DB_PASSWORD"), getenv("DB_DATABASE"));
-    $stid = oci_parse($conn, 'SELECT * FROM "Users"');
-    oci_execute($stid);
-    while (oci_fetch($stid)) {
-        echo oci_result($stid, 'USERNAME') . " is ";
-        echo oci_result($stid, 'NAME') . "<br>\n";
-    }
-    oci_free_statement($stid);
-} catch(Exception $e) {
-    echo $e->getMessage();
-}
-        
-
- $password = $_GET['password'];
- 
- for($i=0;$i<1;$i++){
-    $old_hash = $password_hash;
-    $password_hash = password_hash($password, PASSWORD_ARGON2ID, ['memory_cost' => 4096, 'time_cost' => 8, 'threads' => 1]);
-    if($old_hash == $password_hash){
-        echo("whaat?");
-    }
-}
- echo($password_hash);
- echo('<br>'.$password.'<br>');
- if (password_verify($password,'$argon2id$v=19$m=4096,t=16,p=4$NWRDQmpHZWJ0eVYwQ3lXRg$Hv3ITWot6McKYqWSfytTMA')) {
-    echo('Password is valid!');
-} else {
-    echo('Invalid password.');
-}
-    echo("<br>end");
-    */
- ?>
-
-
+</html>

@@ -20,7 +20,7 @@ if (!isset($_SESSION['loggedin'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/resources/typeahead/jquery.typeahead.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
-    <link rel="stylesheet" href="/resources/css/base/style.ccss">
+    <link rel="stylesheet" href="/resources/css/base/style.css">
     <script >
         $(document).ready(function() {
             $.typeahead({
@@ -46,11 +46,24 @@ if (!isset($_SESSION['loggedin'])) {
             });
         });
     </script>
+    <style>
+        #search-usrn[readonly]{
+            background: lightgray;
+        }
+    </style>
 </head>
 <body>
 
     <div class="window">
-        <h1>Aggiungi un debito</h1>
+        <h1>Aggiungi un debito
+        <?php
+                if(isset($_GET["group"])){
+                    include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");
+                    echo "<br>(Gruppo: <strong>\"". _UTILS_getGroupByCode($_GET["group"])["GROUPNAME"] ."\"</strong>)"; 
+                }
+            
+             ?>
+        </h1>
         <form id="form-Debit" name="form-Debit" method="post" action="/fnct/register_debt?<?= isset($_GET["group"])?"group=".$_GET["group"]:"";   ?>" >
             
             <div class="typeahead__container">
@@ -59,7 +72,7 @@ if (!isset($_SESSION['loggedin'])) {
                         <label>
                             <i class="fas fa-user"></i>
                         </label>
-                        <input id="search-usrn" class="typeahead-Users" name="user" placeholder="Username" autocomplete="off" value=<?= $_GET["user"] ?>>
+                        <input id="search-usrn" class="typeahead-Users" name="user" placeholder="Username" autocomplete="off" value="<?= $_GET["user"] ?>" <?= (isset($_GET["user"])&& $_GET["user"] != "")?"readonly":"" ?>>
                     </div>
                     <div class="typeahead__button">
                         

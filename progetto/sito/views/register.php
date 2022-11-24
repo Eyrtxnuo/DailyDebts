@@ -1,4 +1,14 @@
 <?php
+
+function getStringBetween($str,$from,$to, $withFromAndTo = false)
+{
+   $sub = substr($str, strpos($str,$from)+strlen($from),strlen($str));
+   if ($withFromAndTo)
+     return $from . substr($sub,0, strrpos($sub,$to)) . $to;
+   else
+     return substr($sub,0, strrpos($sub,$to));
+}
+
 // We need to use sessions, so you should always start sessions using the below code.
 session_start();
 // If the user is not logged in redirect to the login page...
@@ -11,7 +21,7 @@ $DATABASE_NAME = getenv("DB_DATABASE");
 
 
 try {
-    $conn = oci_connect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+    $conn = oci_pconnect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
     
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -27,13 +37,13 @@ try {
         goto document;
     }
 
-    $usg = oci_parse($conn, 'SELECT 1 FROM "Users" WHERE Username = :usrn');
+    /*$usg = oci_parse($conn, 'SELECT 1 FROM "Users" WHERE Username = :usrn');
     oci_bind_by_name($usg, ':usrn', $username);
     oci_execute($usg);
     if(oci_fetch($usg)){
-        $regerr = 'The username is already used!';
+        $regerr = 'L\'Username è già usato!';
         goto document;
-    }
+    }*/
 
     $stid = oci_parse($conn, 'INSERT INTO "Users" (USERNAME, NAME, SURNAME, PSSW_HASH) VALUES (:usrn, :nm, :sn, :pssw)');
     
@@ -50,7 +60,34 @@ try {
         header('Location: /dashboard');
 	    exit();
     }       
-    $regerr = 'Error in the registration process!'.print_r(oci_error($stid),true);
+    $error = oci_error($stid);
+    switch($error['code']){
+        case 1:
+            $err = getStringBetween($error["message"],"(",")");
+            switch($err){
+                case 'ADMIN.USERS_PK':
+                    $regerr = 'L\'username è già stato usato!';
+                    break;
+                default:
+                    $regerr = 'Valori non validi!';
+                    break;
+            }
+            break;
+        case 2290:
+            $err = getStringBetween($error["message"],"(",")");
+            switch($err){
+                case 'ADMIN.USERNAMEREGEX':
+                    $regerr = 'L\'username contiene caratteri non validi!';
+                    break;
+                default:
+                    $regerr = 'Valori non validi!';
+                    break;
+            }
+            break;
+        default:
+            $regerr = 'Error in the registration process!';//.print_r(oci_error($stid,true));
+            break;
+    }
     oci_free_statement($stid);
 
 } catch(Exception $e) {
@@ -68,28 +105,28 @@ document:
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
         <link rel="stylesheet" href="/resources/css/base/style.css">
 	</head>
-	<body>
-        <img src="..\resources\immagini\LogoNoBG.png">
+    <body>
+        <img src="\resources\immagini\LogoNoBG.png">
 		<div class="login">
 			<h1>Register</h1>
 			<form method="post">
-				<label for="username">
+				<label for="username" class="field">
 					<i class="fas fa-user"></i>
 				</label>
-				<input type="text" name="username" placeholder="Username" id="username" required>
-				<label for="Name">
+				<input type="text" name="username" placeholder="Username" id="username" minlength="3" required>
+				<label for="Name" class="field">
                     <i class="fa-solid fa-n"></i>
 				</label>
 				<input type="text" name="name" placeholder="Name" id="name" required>
-				<label for="Surname">
+				<label for="Surname" class="field">
                     <i class="fa-solid fa-s"></i>
 				</label>
 				<input type="text" name="surname" placeholder="Surname" id="surname" required>
-				<label for="password">
+				<label for="password" class="field">
 					<i class="fas fa-lock"></i>
 				</label>
 				<input type="password" name="password" placeholder="Password" id="password" >
-                <label class="error" id="login-error">  
+                <label class="error" id="login-error" >  
                     <?= $regerr ?>
 				</label>
 				<input type="submit" value="Register">

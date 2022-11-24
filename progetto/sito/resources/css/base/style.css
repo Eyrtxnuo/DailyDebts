@@ -7,8 +7,6 @@
 }
 body {
     background-color: rgb(59, 59, 59);
-    height: auto;
-    width: auto;
 }
 .login {
     width: 400px;
@@ -39,25 +37,6 @@ body {
     height: 50px;
     background-color: rgb(255, 204, 87);
     color: #ffffff;
-}
-
-.labelForm{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-    background-color: rgb(255, 204, 87);
-    color: #ffffff;
-}
-
-.inputForm{
-    background-color: #fff;
-    width: 310px;
-    height: 50px;
-    border: 2px solid rgb(255, 204, 87);
-    margin-bottom: 20px;
-    padding: 0 15px;
 }
 
 .login form input{
@@ -139,6 +118,7 @@ body.loggedin {
 }
 .content > p, .content > div {
 	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+    left: 0;
 	margin: 25px 0;
 	padding: 25px;
 	background-color: #fff;
@@ -187,20 +167,19 @@ a:hover{
     background-color: rgb(255, 204, 87);
     margin: 20px;
     border-radius: 5px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,0);
     color: rgb(59, 59, 59);
-    cursor: pointer;
 }
 
-#btnLog{
-    position: absolute;
-    top: 40%;
-    left: 35%;
+.btnHome:hover {
+    background-color: rgb(255 204 87 / 85%);
 }
 
-#btnReg{
-    position: absolute;
-    top: 40%;
-    right: 35%;
+.btnHome:active {
+    background-color: rgba(255, 214, 119, 0.85);
 }
 
 .nero{
@@ -211,9 +190,97 @@ a:hover{
     color: rgb(19, 19, 19);
 }
 
+.labelForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(255, 204, 87);
+    color: #ffffff;
+}
+
+.inputForm{
+    background-color: #fff;
+    width: 310px;
+    height: 50px;
+    border: 2px solid rgb(255, 204, 87);
+    margin-bottom: 20px;
+    padding: 0 15px;
+}
+
 p{
     position: relative;
     left: 10%;
     bottom: 0px;
     color: #c1c4c8;
 }
+
+.window {
+    width: 400px;
+    background-color: rgb(195, 195, 195);
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+    margin: 100px auto;
+    border-radius: 2%;
+    overflow: hidden;
+}
+.window h1 {
+    text-align: center;
+    color: rgb(59, 59, 59);
+    font-size: 24px;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid #dee0e4;
+}
+.window form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.window form label {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(255, 204, 87);
+    color: #ffffff;
+}
+
+.window form input{
+    background-color: #fff;
+}
+
+.inputField[type="password"], .inputField[type="text"] {
+    width: 310px;
+    height: 50px;
+    border: 2px solid rgb(255, 204, 87);
+    margin-bottom: 20px;
+    padding: 0 15px;
+}
+
+.window > form > input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: rgb(255, 204, 87);
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: rgb(59, 59, 59);
+    transition: background-color 0.2s;
+}
+.window > form > input[type="submit"]:hover {
+  background-color: rgb(225, 174, 57);
+    transition: background-color 0.2s;
+}
+
+#search-usrn, #sum, #desc{
+    width: 310px;
+}
+
+#sum, #desc{
+    margin-left: 5px;
+}
+

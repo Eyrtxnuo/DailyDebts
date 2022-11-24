@@ -63,12 +63,12 @@ Members:
 Storico debiti:
 <ul>
 <?php
-	$stid = oci_parse($conn,'SELECT * FROM "DEBTS" debt INNER JOIN "GROUPS" gr ON GROUP_ID = gr.ID WHERE CODE = :code');
+	$stid = oci_parse($conn,'SELECT DEBTOR,CREDITOR,VALUE,debt.DESCRIPTION as DDESC FROM "DEBTS" debt INNER JOIN "GROUPS" gr ON GROUP_ID = gr.ID WHERE CODE = :code ORDER BY CREATED_AT DESC');
 		
 	oci_bind_by_name($stid, ':code', $groupView);
 	oci_execute($stid);
 	while(($res = oci_fetch_array($stid, OCI_ASSOC))!=false){
-		echo("<li>".$res['DEBTOR']." <i class='fa-solid fa-arrow-right'></i> ".$res['VALUE']."€ <i class='fa-solid fa-arrow-right'></i> ". $res['CREDITOR'].": ".$res["DESCRIPTION"]."</li>");
+		echo("<li>".$res['DEBTOR']." <i class='fa-solid fa-arrow-right'></i> ".$res['VALUE']."€ <i class='fa-solid fa-arrow-right'></i> ". $res['CREDITOR'].": ".$res["DDESC"]."</li>");
 	}
 ?>
 </ul>

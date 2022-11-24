@@ -8,22 +8,20 @@ table{
 </style>
 
 <?php
-    //require('./fpdf/fpdf.php');
+    // We need to use sessions, so you should always start sessions using the below code.
     session_start();
     if(!isset($_SESSION['loggedin']))
     {
         header('Location: /login');
-        exit();
     }
-    $debitore=$_SESSION["name"];
-    $creditore=$_SESSION["name"];
+    $user=$_SESSION["name"];
     
     $query="SELECT q.ID,CREDITOR,DEBTOR,q.DESCRIPTION,VALUE,q.CREATED_AT,gr.CODE FROM DEBTS q LEFT JOIN GROUPS gr ON gr.ID = GROUP_ID where DEBTOR= :deb OR CREDITOR= :cred ORDER BY q.ID";
     
-    $conn = oci_pconnect(getenv("DB_USERNAME"), getenv("DB_PASSWORD"), getenv("DB_DATABASE"));
+    $conn = oci_pconnect(getenv("DB_USERNAME"), getenv("DB_PASSWORD"), getenv("DB_DATABASE"), 'AL32UTF8');
     $stid = oci_parse($conn, $query);
-    oci_bind_by_name($stid, ":deb", $debitore);
-    oci_bind_by_name($stid, ":cred", $creditore);
+    oci_bind_by_name($stid, ":deb", $user);
+    oci_bind_by_name($stid, ":cred", $user);
     oci_execute($stid);
 
     // if(oci_result($stid,'debitor')>0)
@@ -50,4 +48,6 @@ table{
             echo '<td>' . $row['CODE'] . '</td>';
             echo '</tr>';
         }
+
+        echo '</table>';
 ?>

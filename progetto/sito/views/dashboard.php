@@ -15,7 +15,7 @@ if (!isset($_SESSION['loggedin'])) {
 		<meta http-equiv="Cache-control" content="private">
 		<title>DailyDebts - Dashboard</title>
 		<link rel="stylesheet" href="/resources/css/base/style.css">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
 		<style>
 			div.span button{
 				background: #2f3947;
@@ -59,7 +59,18 @@ if (!isset($_SESSION['loggedin'])) {
 						
 						$conn = oci_pconnect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME, 'AL32UTF8');
 						
-						$stid = oci_parse($conn, 'SELECT GROUPNAME,CODE FROM "GroupMembers" INNER JOIN "GROUPS" ON GROUPID = GROUPS.ID WHERE USERNAME = :usrn ORDER BY ID DESC' );
+						$stid = oci_parse($conn, 
+						'SELECT 
+							GROUPNAME,CODE,JOINED_AT
+						 FROM "GroupMembers"
+						  INNER JOIN "GROUPS" ON GROUPID = GROUPS.ID 
+						  WHERE USERNAME = :usrn 
+						ORDER BY 
+							COALESCE(
+								(SELECT MAX(deb.CREATED_AT) FROM "DEBTS" deb WHERE deb.GROUP_ID = GROUPID),
+								JOINED_AT
+							)
+						 DESC' );
 						
 						
 						oci_bind_by_name($stid, ':usrn', $_SESSION['name']);
@@ -79,7 +90,26 @@ if (!isset($_SESSION['loggedin'])) {
 				<h2>Friends <button onclick="window.location.href='/addFriend'">Add Friend</button></h2>
 				<ul>
 					<?php  
-					$stid = oci_parse($conn,'SELECT USERNAME,NAME,SURNAME,ID FROM "Users" INNER JOIN (SELECT USER1 AS FRIEND,FRIENDS_FROM FROM "FRIENDSHIPS" WHERE USER2 = :usrn UNION SELECT USER2 AS FRIEND,FRIENDS_FROM FROM "FRIENDSHIPS" WHERE USER1 = :usrn) ON USERNAME = FRIEND ORDER BY FRIENDS_FROM DESC');
+					$stid = oci_parse($conn,
+					'SELECT 
+					USERNAME,NAME,SURNAME,ID 
+					FROM "Users" 
+					INNER JOIN 
+						( SELECT
+						  USER1 AS FRIEND,FRIENDS_FROM
+						  FROM "FRIENDSHIPS" 
+						  WHERE USER2 = :usrn 
+						 UNION 
+						  SELECT 
+						  USER2 AS FRIEND,FRIENDS_FROM 
+						  FROM "FRIENDSHIPS" WHERE USER1 = :usrn )
+					ON USERNAME = FRIEND 
+					ORDER BY
+					 COALESCE(
+						(SELECT MAX(CREATED_AT) FROM DEBTS WHERE (DEBTOR = :usrn AND CREDITOR = USERNAME) OR (DEBTOR = USERNAME AND CREDITOR = :usrn) AND GROUP_ID IS NULL),
+						(SELECT FRIENDS_FROM  FROM "FRIENDSHIPS" WHERE (USER1 = :usrn AND USER2 = USERNAME) OR (USER1 = USERNAME AND USER2 = :usrn))
+					 )
+					 DESC');
     
 					oci_bind_by_name($stid, ':usrn', $_SESSION['name']);
 				

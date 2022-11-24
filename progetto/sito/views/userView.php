@@ -16,7 +16,7 @@ if($userView == $_SESSION['name']){
 
 try {
     
-    $conn = oci_pconnect(getenv("DB_USERNAME"), getenv("DB_PASSWORD"), getenv("DB_DATABASE"));
+    $conn = oci_pconnect(getenv("DB_USERNAME"), getenv("DB_PASSWORD"), getenv("DB_DATABASE"), 'AL32UTF8');
    /* $stid = oci_parse($conn, 'SELECT * FROM "Users" WHERE USERNAME = :user');
 
     oci_bind_by_name($stid, ":user", $userView);
@@ -44,6 +44,7 @@ Surname: <?= oci_result($stid, "SURNAME") ?><br>
 
 <br>
 <button onclick="window.location.href='/addDebt?user=<?= $userView ?>'">Aggiungi debito</button>
+<button onclick="window.location.href='/addCredit?user=<?= $userView ?>'">Aggiungi credito</button>
 <br>
 
 Totale debiti:  <?php
@@ -53,7 +54,7 @@ Totale debiti:  <?php
     oci_execute($stid);
     print_r(oci_fetch_array($stid)[0]);
 ?>
-
+€
 <br><br>
 
 Storico debiti:

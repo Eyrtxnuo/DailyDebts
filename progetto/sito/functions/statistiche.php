@@ -7,7 +7,7 @@ if (!isset($_SESSION['loggedin'])) {
     header('Location: /login');
     exit;
 }
-$conn = oci_pconnect(getenv("DB_USERNAME"), getenv("DB_PASSWORD"), getenv("DB_DATABASE"));
+$conn = oci_pconnect(getenv("DB_USERNAME"), getenv("DB_PASSWORD"), getenv("DB_DATABASE"), 'AL32UTF8');
 $stid = oci_parse($conn, 'SELECT SUM(VALUE) FROM "DEBTS" WHERE DEBTOR=:USERN');
 oci_bind_by_name($stid,":USERN", $_SESSION["name"]);
 oci_execute($stid);
@@ -22,8 +22,11 @@ $credittot = oci_result($stid, "SUM(VALUE)"); //credito fatto
 
 $perdebit = $debittot/($credittot+$debittot)*100;//percentuale debito creato confronto al credito fatto
 $percredit = $credittot/($credittot+$debittot)*100;//percentuale credito creato confronto al debito fatto
+echo "Crediti: ".round($percredit,2)."%<br>";
+echo "Debiti: ".round($perdebit,2)."%<br>";
+echo "Somma " . $percredit + $perdebit;
 
-$stid = oci_parse($conn, 'SELECT CREDITOR,SUM(VALUE) FROM "DEBTS" WHERE DEBTOR=:USERN group by creditor');
+$stid = oci_parse($conn, 'SELECT CREDITOR,SUM(VALUE) FROM "DEBTS" WHERE DEBTOR=:USERN GROUP BY CREDITOR');
 oci_bind_by_name($stid,":USERN", $_SESSION["name"]);
 oci_execute($stid);
 $max=null;
@@ -32,9 +35,10 @@ while($risultato=oci_fetch_array($stid)){
         $max=$risultato;
     }
 }
+echo "<br>";
 print_r($max);//creditore più alto
 
-$stid = oci_parse($conn, 'SELECT DEBTOR,SUM(VALUE) FROM "DEBTS" WHERE CREDITOR=:USERN group by DEBTOR');
+    $stid = oci_parse($conn, 'SELECT DEBTOR,SUM(VALUE) FROM "DEBTS" WHERE CREDITOR=:USERN GROUP BY DEBTOR');
 oci_bind_by_name($stid,":USERN", $_SESSION["name"]);
 oci_execute($stid);
 $max=null;
@@ -43,6 +47,7 @@ while($risultato=oci_fetch_array($stid)){
         $max=$risultato;
     }
 }
+echo "<br>";
 print_r($max);//debitore più alto
 
 ?>

@@ -44,7 +44,7 @@ try {
 		$_SESSION['name'] = $_POST['username'];
         header('Location: '.$redirect);
     } else {
-        $loginerr = 'Invalid username or password.';
+        $loginerr = 'Username o password errati.';
     }
         
 

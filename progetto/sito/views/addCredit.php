@@ -20,7 +20,7 @@ if (!isset($_SESSION['loggedin'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/resources/typeahead/jquery.typeahead.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
-    <link rel="stylesheetz" href="/resources/css/base/style.css">
+    <link rel="stylesheet" href="/resources/css/base/style.css">
     <script>
         $(document).ready(function() {
             $.typeahead({
@@ -38,6 +38,7 @@ if (!isset($_SESSION['loggedin'])) {
                 minLenght: 3,
                 asyncResult: false,
                 mustSelectItem: false,
+                cancelButton: false,
                 callback: {
                     onInit: function (node) {
                         console.log('Typeahead Initiated on ' + node.selector);
@@ -46,6 +47,11 @@ if (!isset($_SESSION['loggedin'])) {
             });
         });
     </script>
+    <style>
+         #search-usrn[readonly]{
+            background: lightgray !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -56,24 +62,25 @@ if (!isset($_SESSION['loggedin'])) {
             <div class="typeahead__container">
                 <div class="typeahead__fieldz">
                     <div class="typeahead__queryz">
-                        <label>
+                        <label for="user" class="field">
                             <i class="fas fa-user"></i>
                         </label>
-                        <input id="search-usrn" class="typeahead-Users" name="user" placeholder="Username" autocomplete="off" value=<?= $_GET["user"] ?>>
+                        <input  id="search-usrn" class="typeahead-Users" name="user" placeholder="Username" autocomplete="off" value=<?= $_GET["user"] ?> <?= (isset($_GET["user"])&& $_GET["user"] != "")?"readonly":"" ?> >
                     </div>
                     <div class="typeahead__button">
                         
                     </div>
                 </div>
             </div>
-            <label for="sum">
+            <br>
+            <label for="sum" class="field">
                 <i class="fa-solid fa-euro-sign"></i>
             </label>
             <input type="number" name="sum" placeholder="Sum" id="sum" min="0.01" step="0.01" autocomplete="off" required>
             
             <br>
 
-            <label for="sum">
+            <label for="desc" class="field">
                 <i class="fa-solid fa-quote-right"></i>
             </label>
             <textarea name="desc" id="desc" placeholder="Description" cols="40" rows="5" autocomplete="off" maxlength="1000"></textarea>
@@ -84,7 +91,5 @@ if (!isset($_SESSION['loggedin'])) {
         </form>
     </div>
     
-
-        
 </body>
 </html>

@@ -26,7 +26,7 @@ $DATABASE_USER = getenv("DB_USERNAME");
 $DATABASE_PASS = getenv("DB_PASSWORD");
 $DATABASE_NAME = getenv("DB_DATABASE");
 
-$conn = oci_pconnect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+$conn = oci_pconnect($DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME, 'AL32UTF8');
 $stid = oci_parse($conn, 'INSERT INTO "DEBTS" (DEBTOR, CREDITOR, VALUE, DESCRIPTION, GROUP_ID) VALUES (:debit, :credit, :deb_sum, :descr, :grId)');
 
 oci_bind_by_name($stid, ':debit', $_SESSION['name']);
@@ -44,10 +44,5 @@ if(oci_execute($stid, OCI_COMMIT_ON_SUCCESS)){
 	print_r(oci_error($stid)['message']);
 }
 	
-	
-
-
-	
-
 oci_free_statement($stid);
 ?>
