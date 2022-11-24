@@ -82,7 +82,7 @@ if (!isset($_SESSION['loggedin'])) {
             <label for="sum">
                 <i class="fa-solid fa-euro-sign"></i>
             </label>
-            <input type="number" name="sum" placeholder="Sum" id="sum" min="0.01" step="0.01" autocomplete="off" required>
+            <input type="number" name="sum" placeholder="Sum" id="sum" min="0.01" step="1.0" autocomplete="off" required>
             
             <br>
 
