@@ -9,7 +9,7 @@ if (!isset($_SESSION['loggedin'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,6 +18,7 @@ if (!isset($_SESSION['loggedin'])) {
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
     <link rel="stylesheet" href="/resources/typeahead/jquery.typeahead.min.css">
+    <link rel="stylesheet" href="/resources/css/base/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/resources/typeahead/jquery.typeahead.min.js"></script>
     <script >
@@ -34,7 +35,7 @@ if (!isset($_SESSION['loggedin'])) {
                     }
                 },
                 dynamic: true,
-                minLenght: 3,
+                minLenght: 2,
                 asyncResult: false,
                 mustSelectItem: false,
                 callback: {
@@ -47,6 +48,7 @@ if (!isset($_SESSION['loggedin'])) {
     </script>
 </head>
 <body>
+<img src="..\resources\immagini\LogoNoBG.png">
 <div class="window">
         <h1>Aggiungi Amico</h1>
         <form method="post" action="/fnct/add_friend" >
@@ -72,3 +74,4 @@ if (!isset($_SESSION['loggedin'])) {
     </div>
 </body>
 </html>
+

@@ -29,7 +29,8 @@ if(!oci_execute($stid, OCI_COMMIT_ON_SUCCESS)){
 $resp = oci_fetch_array($stid);
 if($resp[0] != 1){
     http_response_code(400);	
-	echo("Errore! Valori non validi!");
+	include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");	
+	_UTILS_showMessage("Valori non validi!","Errore!");
 	exit;
 }
 echo "Group Joined!!";

@@ -33,14 +33,16 @@ try {
 		<meta charset="utf-8">
 		<title>DailyDebts - Profile</title>
 		<link href="/resources/css/base/style.css" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
 	</head>
 	<body class="loggedin">
 		<nav class="navtop">
 			<div>
-				<h1>DailyDebts</h1>
-				<a href="/profile"><i class="fas fa-user-circle"></i>Profile</a>
-				<a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+				<a href="/dashboard" style="display: contents;"><img src="\resources\immagini\LogoNoBG.png"></a>
+				<div style="width:100%; justify-content: flex-end;">
+					<a href="/dashboard" class="navElement"><i class="fa-solid fa-house"></i>Dashboard</a>
+					<a href="/logout" class="navElement"><i class="fas fa-sign-out-alt"></i>Logout</a>
+				</div>
 			</div>
 		</nav>
 		<div class="content">

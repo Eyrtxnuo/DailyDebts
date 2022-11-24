@@ -57,4 +57,9 @@ function _UTILS_getStringBetween($str,$from,$to, $withFromAndTo = false)
      return substr($sub,0, strrpos($sub,$to));
 }
 
+function _UTILS_showMessage($message, $title = "Messaggio"){
+    require($_SERVER['DOCUMENT_ROOT'] . "/views/message.php");
+}
+
+
 ?>

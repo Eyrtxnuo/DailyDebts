@@ -1,13 +1,6 @@
 <?php
 
-function getStringBetween($str,$from,$to, $withFromAndTo = false)
-{
-   $sub = substr($str, strpos($str,$from)+strlen($from),strlen($str));
-   if ($withFromAndTo)
-     return $from . substr($sub,0, strrpos($sub,$to)) . $to;
-   else
-     return substr($sub,0, strrpos($sub,$to));
-}
+
 
 // We need to use sessions, so you should always start sessions using the below code.
 session_start();
@@ -60,10 +53,11 @@ try {
         header('Location: /dashboard');
 	    exit();
     }       
+    include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");
     $error = oci_error($stid);
     switch($error['code']){
         case 1:
-            $err = getStringBetween($error["message"],"(",")");
+            $err = _UTILS_getStringBetween($error["message"],"(",")");
             switch($err){
                 case 'ADMIN.USERS_PK':
                     $regerr = 'L\'username è già stato usato!';
@@ -74,7 +68,7 @@ try {
             }
             break;
         case 2290:
-            $err = getStringBetween($error["message"],"(",")");
+            $err = _UTILS_getStringBetween($error["message"],"(",")");
             switch($err){
                 case 'ADMIN.USERNAMEREGEX':
                     $regerr = 'L\'username contiene caratteri non validi!';
@@ -85,7 +79,7 @@ try {
             }
             break;
         default:
-            $regerr = 'Error in the registration process!';//.print_r(oci_error($stid,true));
+            $regerr = 'Errore nella registrazione!';//.print_r(oci_error($stid,true));
             break;
     }
     oci_free_statement($stid);
@@ -132,5 +126,6 @@ document:
 				<input type="submit" value="Register">
 			</form>
 		</div>
+        <p class="center" style="left:0;"><a href="/login" class="center">Login</a>
 	</body>
 </html>

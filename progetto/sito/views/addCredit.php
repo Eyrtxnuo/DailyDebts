@@ -29,16 +29,16 @@ if (!isset($_SESSION['loggedin'])) {
                     tag: {
                         ajax: function (query) {
                             return {
-                                url: "/search?key="+query,
+                                url: "/search?<?= isset($_GET["group"])?"group=".$_GET["group"]."&":"";   ?>key="+query,
                             }
                         }
                     }
                 },
                 dynamic: true,
-                minLenght: 3,
+                minLenght: 2,
                 asyncResult: false,
                 mustSelectItem: false,
-                cancelButton: false,
+                cancelButton: true,
                 callback: {
                     onInit: function (node) {
                         console.log('Typeahead Initiated on ' + node.selector);
@@ -54,9 +54,17 @@ if (!isset($_SESSION['loggedin'])) {
     </style>
 </head>
 <body>
-
+<a href="/dashboard" style="display: contents;"><img src="\resources\immagini\LogoNoBG.png"></a>
     <div class="window">
-        <h1>Aggiungi un credito</h1>
+    <h1>Aggiungi un credito
+        <?php
+                if(isset($_GET["group"])){
+                    include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");
+                    echo "<br>(Gruppo: <strong>\"". _UTILS_getGroupByCode($_GET["group"])["GROUPNAME"] ."\"</strong>)"; 
+                }
+            
+             ?>
+        </h1>
         <form id="form-Debit" name="form-Debit" method="post" action="/fnct/register_credit?<?= isset($_GET["group"])?"group=".$_GET["group"]:"";   ?>" >
             
             <div class="typeahead__container">
@@ -76,7 +84,7 @@ if (!isset($_SESSION['loggedin'])) {
             <label for="sum" class="field">
                 <i class="fa-solid fa-euro-sign"></i>
             </label>
-            <input type="number" name="sum" placeholder="Sum" id="sum" min="0.01" step="0.01" autocomplete="off" required>
+            <input type="number" name="sum" placeholder="Valore" id="sum" min="0.01" step="0.01" autocomplete="off" required>
             
             <br>
 

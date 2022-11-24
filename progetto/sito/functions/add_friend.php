@@ -22,14 +22,16 @@ oci_bind_by_name($stid, ':friend', $_POST['friend']);
 
 if(!oci_execute($stid, OCI_COMMIT_ON_SUCCESS)){
 	http_response_code(400);	
-	echo("Errore nella query!");
+	include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");	
+	_UTILS_showMessage("Errore nella query!");
 	print_r(oci_error($stid)['message']);
 	exit;
 }
 $resp = oci_fetch_array($stid);
 if($resp[0] != 1){
-    http_response_code(400);	
-	echo("Errore! Sei già amico con l'User!");
+    http_response_code(400);
+	include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");	
+	_UTILS_showMessage("Sei già amico con l'User!","Errore!");
 	exit;
 }
 echo "Amico Aggiunto!!";

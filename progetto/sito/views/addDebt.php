@@ -29,15 +29,16 @@ if (!isset($_SESSION['loggedin'])) {
                     tag: {
                         ajax: function (query) {
                             return {
-                                url: "/search?key="+query,
+                                url: "/search?<?= isset($_GET["group"])?"group=".$_GET["group"]."&":"";   ?>key="+query,
                             }
                         }
                     }
                 },
                 dynamic: true,
-                minLenght: 3,
+                minLenght: 2,
                 asyncResult: false,
                 mustSelectItem: false,
+                cancelButton: true,
                 callback: {
                     onInit: function (node) {
                         console.log('Typeahead Initiated on ' + node.selector);
@@ -53,7 +54,7 @@ if (!isset($_SESSION['loggedin'])) {
     </style>
 </head>
 <body>
-
+<a href="/dashboard" style="display: contents;"><img src="\resources\immagini\LogoNoBG.png"></a>
     <div class="window">
         <h1>Aggiungi un debito
         <?php
@@ -82,7 +83,7 @@ if (!isset($_SESSION['loggedin'])) {
             <label for="sum">
                 <i class="fa-solid fa-euro-sign"></i>
             </label>
-            <input type="number" name="sum" placeholder="Sum" id="sum" min="0.01" step="1.0" autocomplete="off" required>
+            <input type="number" name="sum" placeholder="Valore" id="sum" min="0.01" step="0.01" autocomplete="off" required>
             
             <br>
 

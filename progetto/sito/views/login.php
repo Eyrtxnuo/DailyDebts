@@ -84,6 +84,6 @@ document:
 				<input type="submit" value="Login">
 			</form>
 		</div>
-        <a href="register.html" class="center">Register</a>
+        <p class="center" style="left:0;"><a href="/register" class="center">Register</a>
 	</body>
 </html>

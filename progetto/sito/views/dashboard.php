@@ -39,18 +39,19 @@ if (!isset($_SESSION['loggedin'])) {
 		</style>
 	</head>
 	<body class="loggedin">
-		<nav class="navtop">
+	<nav class="navtop">
 			<div>
-				<h1>DailyDebts </h1>
-				<a href="/profile"><i class="fas fa-user-circle"></i>Profile</a>
-				<a href="/logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+				<a href="/dashboard" style="display: contents;"><img src="\resources\immagini\LogoNoBG.png"></a>
+				<div style="width:100%; justify-content: flex-end;">
+					<a href="/profile" class="navElement"><i class="fas fa-user-circle"></i>Profile</a>
+					<a href="/logout" class="navElement"><i class="fas fa-sign-out-alt"></i>Logout</a>
+				</div>
 			</div>
 		</nav>
 		<div class="content">
 			<h2>Home Page</h2>
-			<p>Welcome back, <?=$_SESSION['name']?>!</p>
-			<div class="span">
-				<h2>Groups <div><button onclick="window.location.href='/createGroup'">Create</button><button onclick="window.location.href='/joinGroup'">Join</button></div></h2>
+			<div class="cbox">
+				<h2>Groups <div class="boxButton"><button onclick="window.location.href='/createGroup'">Create</button><button onclick="window.location.href='/joinGroup'">Join</button></div></h2>
 				<ul>
 					<?php  
 						$DATABASE_USER = getenv("DB_USERNAME");
@@ -86,8 +87,8 @@ if (!isset($_SESSION['loggedin'])) {
 					?>
 				</ul>
 			</div>
-			<div class="span">
-				<h2>Friends <button onclick="window.location.href='/addFriend'">Add Friend</button></h2>
+			<div class="cbox">
+				<h2>Friends <div class="boxButton"><button onclick="window.location.href='/addFriend'">Add Friend</button></div></h2>
 				<ul>
 					<?php  
 					$stid = oci_parse($conn,

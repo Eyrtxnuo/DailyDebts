@@ -1,3 +1,19 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/resources/css/base/style.css">
+    <title>Document</title>
+    <style>
+        h2{
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+<div class="window" style="padding:20px;">
 <?php
 // We need to use sessions, so you should always start sessions using the below code.
 session_start();
@@ -33,19 +49,18 @@ try {
 }
 
 ?>
-<!DOCTYPE html>
-<html>
-	<head>
-    <meta charset="utf-8">
-	<title>Group</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
-</head>
-<body>
-Invite code: <?= $groupView ?><br>
-Group name: <?= oci_result($stid, "GROUPNAME") ?><br>
-Description: <?= oci_result($stid, "DESCRIPTION") ?><br>
 
-Members:
+<h1><?= oci_result($stid, "GROUPNAME")?></h1>
+
+<h2>Codice invito:</h2> <?= $groupView ?><br>
+<h2>Nome del gruppo:</h2> <?= oci_result($stid, "GROUPNAME") ?><br>
+<h2>Descrizione gruppo:</h2> <?= oci_result($stid, "DESCRIPTION") ?><br>
+<br>
+<button onclick="window.location.href='/addDebt?group=<?= $groupView ?>'">Aggiungi debito</button>
+<button onclick="window.location.href='/addCredit?group=<?= $groupView ?>'">Aggiungi credito</button>
+<br>
+<br>
+<h2>Membri:</h2>
 <ul>
 <?php
 	$stid = oci_parse($conn,'SELECT * FROM "GroupMembers" INNER JOIN "GROUPS" ON GROUPID = ID WHERE CODE = :code');
@@ -57,10 +72,9 @@ Members:
 	}
 ?>
 </ul>
-<button onclick="window.location.href='/addDebt?group=<?= $groupView ?>'">Aggiungi debito</button>
 <br>
 <br>
-Storico debiti:
+<h2>Storico debiti:</h2>
 <ul>
 <?php
 	$stid = oci_parse($conn,'SELECT DEBTOR,CREDITOR,VALUE,debt.DESCRIPTION as DDESC FROM "DEBTS" debt INNER JOIN "GROUPS" gr ON GROUP_ID = gr.ID WHERE CODE = :code ORDER BY CREATED_AT DESC');
@@ -74,5 +88,6 @@ Storico debiti:
 </ul>
 
 
+</div>
 </body>
-<html>
+</html>

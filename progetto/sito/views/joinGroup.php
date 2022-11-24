@@ -9,7 +9,7 @@ if (!isset($_SESSION['loggedin'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,9 +17,11 @@ if (!isset($_SESSION['loggedin'])) {
     <title>Entra in un gruppo</title>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
-    
+    <link rel="stylesheet" href="/resources/css/base/style.css">
+
 </head>
 <body>
+<a href="/dashboard" style="display: contents;"><img src="\resources\immagini\LogoNoBG.png"></a>
 <div class="window">
         <h1>Entra in un gruppo</h1>
         <form method="post" action="/fnct/join_group" >

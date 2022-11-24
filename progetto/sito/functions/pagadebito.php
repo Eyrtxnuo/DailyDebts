@@ -19,10 +19,12 @@ $stid = oci_parse($conn, 'INSERT INTO "DEBTS" (DEBTOR, CREDITOR, VALUE) VALUES (
     oci_bind_by_name($stid,":deb_value", $_POST["deb"]);
     
     if(oci_execute($stid, OCI_COMMIT_ON_SUCCESS)){
-        echo("è andato tutto a buon fine");
+        include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");	
+	    _UTILS_showMessage("È andato tutto a buon fine", "Ok!");
     }else{
         http_response_code(400);    
-        echo("Errore!");
+        include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");	
+	    _UTILS_showMessage("Errore!");
         print_r(oci_error($stid)['message']);
     }
 ?>

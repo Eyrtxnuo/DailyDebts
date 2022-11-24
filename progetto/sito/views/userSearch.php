@@ -30,7 +30,7 @@ $.typeahead({
         }
     },
     dynamic: true,
-    minLenght: 3,
+    minLenght: 2,
     asyncResult: false,
     mustSelectItem: true,
     callback: {

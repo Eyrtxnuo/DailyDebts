@@ -37,11 +37,48 @@ $groupID = _UTILS_getGroupByCode($_GET["group"])["ID"];
 oci_bind_by_name($stid, ':grId', $groupID);
 
 if(oci_execute($stid, OCI_COMMIT_ON_SUCCESS)){
-	echo("Debito aggiunto");
+	include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");	
+	_UTILS_showMessage("Debito aggiunto","Ok!");
 }else{
 	http_response_code(400);	
 	echo("Errore!");
-	print_r(oci_error($stid)['message']);
+	include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");
+	$error = oci_error($stid);
+	switch($error['code']){
+		case 2291:
+			$err2291 = _UTILS_getStringBetween($error["message"],"(",")");
+			switch($err2291){
+				case 'ADMIN.INGROUPDEBTOR_FK':
+					$regerr = 'Il debitore non è stato trovato!';
+					break;
+				case 'ADMIN.INGROUPCREDITOR_FK':
+					$regerr = 'Il creditore non è stato trovato!';
+					break;
+				default:
+					$regerr = 'Valori non validi!';
+					break;
+			}
+			break;
+		case 1400:
+			$err1400 = _UTILS_getStringBetween($error["message"],"(",")");
+			switch($err1400){
+				case '"ADMIN"."DEBTS"."DEBTOR"':
+					$regerr = 'Il debitore non è stato trovato!';
+					break;
+				case '"ADMIN"."DEBTS"."CREDITOR"':
+					$regerr = 'Il creditore non è stato trovato!';
+					break;
+				default:
+					$regerr = 'Conrtolla di aver compilato tutti i valori!';
+					break;
+			}
+			break;
+		default:
+			$regerr = 'Errore sconosciuto!'.print_r(oci_error($stid)["message"],true);
+			break;
+	}
+	include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");	
+	_UTILS_showMessage($regerr,"Errore!");
 }
 	
 oci_free_statement($stid);

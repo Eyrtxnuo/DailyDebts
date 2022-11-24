@@ -9,7 +9,7 @@ if (!isset($_SESSION['loggedin'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,6 +17,7 @@ if (!isset($_SESSION['loggedin'])) {
     <title>Creazione Gruppo</title>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
+    <link rel="stylesheet" href="/resources/css/base/style.css">
     
 </head>
 <body>
@@ -28,7 +29,7 @@ if (!isset($_SESSION['loggedin'])) {
             <label for="group-name">
                 <i class="fa-solid fa-hashtag"></i>
             </label>
-            <input type="text" name="group-name" placeholder="Nome del gruppo" maxlength="100" required>
+            <input style="width: 310px;margin: 2px 0 2px 5px;" type="text" name="group-name" placeholder="Nome del gruppo" maxlength="100" required>
             
             <br>
 

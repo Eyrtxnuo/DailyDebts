@@ -1,3 +1,19 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/resources/css/base/style.css">
+    <title>Document</title>
+    <style>
+        h2{
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+<div class="window" style="padding:20px;">
 <?php
 // We need to use sessions, so you should always start sessions using the below code.
 session_start();
@@ -37,17 +53,19 @@ try {
 }
 
 ?>
+<h1><?= oci_result($stid, "NAME")." ".oci_result($stid, "SURNAME")?></h1>
+<h2>Username:</h2> <?= $userView ?><br>
+<h2>Nome:</h2> <?= oci_result($stid, "NAME") ?><br>
+<h2>Cognome:</h2> <?= oci_result($stid, "SURNAME") ?>
 
-Username: <?= $userView ?><br>
-Name: <?= oci_result($stid, "NAME") ?><br>
-Surname: <?= oci_result($stid, "SURNAME") ?><br>
-
+<br>
 <br>
 <button onclick="window.location.href='/addDebt?user=<?= $userView ?>'">Aggiungi debito</button>
 <button onclick="window.location.href='/addCredit?user=<?= $userView ?>'">Aggiungi credito</button>
 <br>
+<br>
 
-Totale debiti:  <?php
+<h2>Totale debiti:</h2>  <?php
     $stid = oci_parse($conn,'SELECT GETUSERDEBT(:usrn, :other) FROM "DUAL"');
     oci_bind_by_name($stid, ':usrn', $_SESSION['name']);
     oci_bind_by_name($stid, ':other', $userView);
@@ -57,7 +75,7 @@ Totale debiti:  <?php
 €
 <br><br>
 
-Storico debiti:
+<h2>Storico debiti:</h2>
 <ul>
 <?php
 
@@ -77,3 +95,6 @@ print_r(oci_error($stid));
 
 ?>
 <ul>
+</div>
+</body>
+</html>

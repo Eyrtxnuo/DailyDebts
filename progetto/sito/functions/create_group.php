@@ -25,8 +25,9 @@ oci_bind_by_name($stid, ':usrn', $_SESSION['name']);
 
 if(!oci_execute($stid, OCI_COMMIT_ON_SUCCESS)){
 	http_response_code(400);	
-	echo("Errore!");
-	print_r(oci_error($stid)['message']);
+	include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");	
+	_UTILS_showMessage("Errore nella query!","Errore!");
+	print_r(oci_error($stid)['message'],true);
 	exit;
 }
 $groupID = oci_fetch_array($stid)[0];
@@ -39,11 +40,8 @@ oci_execute($stid);
 
 $groupData = oci_fetch_array($stid);
 
-echo("Gruppo creato! (".$groupData['GROUPNAME'].")");
-print_r("<br>Codice invito: ".$groupData['CODE']);
-
-
-
+include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");	
+	_UTILS_showMessage("Gruppo '".$groupData['GROUPNAME']."' creato, Codice invito: ".$groupData['CODE'],"Gruppo creato!");
 	
 
 oci_free_statement($stid);
