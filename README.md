@@ -1,4 +1,7 @@
 # Link al sito -> https://dailydebts.it/
+
+# PowerPoint presentazione -> [DailyDebts PowerPoint](https://ismonnet-my.sharepoint.com/:p:/g/personal/bossi_mattia_ismonnet_onmicrosoft_com/EefhAezelTRDmHoyj82oEQMBh4ntWCmFQ06goAFqYpvfjg?e=MgftB1)
+
 Progetto scolastico a gruppi
 
 Gruppo: [Bossi](https://github.com/Eyrtxnuo), [Ginisi](https://github.com/Gino0), [Maggiolini](https://github.com/DanieleMaggiolini), [Pirovano](https://github.com/piro04)
