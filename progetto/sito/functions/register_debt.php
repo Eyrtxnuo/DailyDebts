@@ -16,8 +16,10 @@ require_once(__DIR__ .'/phpUtils.php');
 
 $user = _UTILS_getUser($_POST["user"]);
 if($user == null){
-	http_response_code(400);	
-	exit("No user found!");
+	http_response_code(400);
+	include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");	
+	_UTILS_showMessage("User non trovato!","Errore!");
+	exit();
 }
 
 

@@ -34,7 +34,9 @@ if($resp[0] != 1){
 	_UTILS_showMessage("Sei già amico con l'User!","Errore!");
 	exit;
 }
-echo "Amico Aggiunto!!";
+include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");	
+_UTILS_showMessage("Amico aggiunto!","Ok!");
+	
 
 
 ?>

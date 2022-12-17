@@ -54,8 +54,17 @@ if (!isset($_SESSION['loggedin'])) {
     </style>
 </head>
 <body>
-<a href="/dashboard" style="display: contents;"><img src="\resources\immagini\LogoNoBG.png"></a>
-    <div class="window">
+
+<nav class="navtop">
+        <div>
+            <a href="/dashboard" style="display: contents;"><img src="\resources\immagini\LogoNoBG.png"></a>
+            <div style="width:100%; justify-content: flex-end;">
+                <a href="/dashboard" class="navElement"><i class="fa-solid fa-house"></i>Dashboard</a>
+                <a href="/logout" class="navElement"><i class="fas fa-sign-out-alt"></i>Logout</a>
+            </div>
+        </div>
+    </nav>
+<div class="window">
     <h1>Aggiungi un credito
         <?php
                 if(isset($_GET["group"])){

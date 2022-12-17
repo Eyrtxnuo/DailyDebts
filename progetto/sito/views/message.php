@@ -22,7 +22,11 @@ if (!isset($_SESSION['loggedin'])) {
 </head>
 <body>
     
-<a href="<?= $redirect ?>" style="display: contents;"><img src="\resources\immagini\LogoNoBG.png"></a>
+<nav class="navtop">
+        <div>
+            <a href="<?= $redirect ?>" style="display: contents;"><img src="\resources\immagini\LogoNoBG.png"></a>
+        </div>
+    </nav>
 <div class="window">
         <h1><?= $title?></h1>
         <h2><p class="center" style="left:0;color:rgb(59, 59, 59);"><?= $message?></p></h2>

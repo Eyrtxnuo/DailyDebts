@@ -21,6 +21,15 @@ if (!isset($_SESSION['loggedin'])) {
     
 </head>
 <body>
+    <nav class="navtop">
+        <div>
+            <a href="/dashboard" style="display: contents;"><img src="\resources\immagini\LogoNoBG.png"></a>
+            <div style="width:100%; justify-content: flex-end;">
+                <a href="/dashboard" class="navElement"><i class="fa-solid fa-house"></i>Dashboard</a>
+                <a href="/logout" class="navElement"><i class="fas fa-sign-out-alt"></i>Logout</a>
+            </div>
+        </div>
+    </nav>
 <div class="window">
         <h1>Creazione gruppo</h1>
         <form method="post" action="/fnct/create_group" >

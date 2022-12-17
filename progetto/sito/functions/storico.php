@@ -1,3 +1,4 @@
+
 <style>
 td{
     border: 1px solid black;
@@ -8,12 +9,17 @@ table{
 </style>
 
 <?php
+    
     // We need to use sessions, so you should always start sessions using the below code.
     session_start();
-    if(!isset($_SESSION['loggedin']))
-    {
+    // If the user is not logged in redirect to the login page...
+    if (!isset($_SESSION['loggedin'])) {
         header('Location: /login');
+        exit;
     }
+    
+    //require('./fpdf/fpdf.php');
+
     $user=$_SESSION["name"];
     
     $query="SELECT q.ID,CREDITOR,DEBTOR,q.DESCRIPTION,VALUE,q.CREATED_AT,gr.CODE FROM DEBTS q LEFT JOIN GROUPS gr ON gr.ID = GROUP_ID where DEBTOR= :deb OR CREDITOR= :cred ORDER BY q.ID";
@@ -48,6 +54,9 @@ table{
             echo '<td>' . $row['CODE'] . '</td>';
             echo '</tr>';
         }
-
-        echo '</table>';
+    // }else {
+    //   echo 'No records were found';
+    // } //else {
+    // echo 'Could not able to execute sql';
+    // }
 ?>

@@ -48,21 +48,30 @@ try {
 		<div class="content">
 			<h2>Profile Page</h2>
 			<div>
-				<p>Your account details are below:</p>
+				<h2>Dettagli degli account:</h2>
 				<table>
 					<tr>
 						<td>Username:</td>
 						<td><?=$_SESSION['name']?></td>
 					</tr>
 					<tr>
-						<td>Name</td>
+						<td>Nome</td>
 						<td><?=oci_result($stid, 'NAME')?></td>
 					</tr>
 					<tr>
-						<td>Surname</td>
+						<td>Cognome</td>
 						<td><?=oci_result($stid, 'SURNAME')?></td>
 					</tr>
 				</table>
+				<br>
+				<h2>Statistiche:</h2>
+				<?php
+					try {
+						include($_SERVER['DOCUMENT_ROOT'] . "/functions/statistiche.php");
+					} catch (\Throwable $th) {
+						echo "<p style=\"left:0;\"><b>Non hai mai avuto debiti!</b></p>";
+					} 
+					?>
 			</div>
 		</div>
 	</body>

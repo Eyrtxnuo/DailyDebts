@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/resources/css/base/style.css">
-    <title>Document</title>
-    <style>
-        h2{
-            display: inline;
-        }
-    </style>
-</head>
-<body>
-<div class="window" style="padding:20px;">
+
 <?php
 // We need to use sessions, so you should always start sessions using the below code.
 session_start();
@@ -53,6 +38,32 @@ try {
 }
 
 ?>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
+    <link rel="stylesheet" href="/resources/css/base/style.css">
+    <title>User: <?=$userView?></title>
+    <style>
+        h2{
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+<nav class="navtop">
+        <div>
+            <a href="/dashboard" style="display: contents;"><img src="\resources\immagini\LogoNoBG.png"></a>
+            <div style="width:100%; justify-content: flex-end;">
+                <a href="/dashboard" class="navElement"><i class="fa-solid fa-house"></i>Dashboard</a>
+                <a href="/logout" class="navElement"><i class="fas fa-sign-out-alt"></i>Logout</a>
+            </div>
+        </div>
+    </nav>
+<div class="window" style="padding:20px;">
 <h1><?= oci_result($stid, "NAME")." ".oci_result($stid, "SURNAME")?></h1>
 <h2>Username:</h2> <?= $userView ?><br>
 <h2>Nome:</h2> <?= oci_result($stid, "NAME") ?><br>

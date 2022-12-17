@@ -9,14 +9,12 @@
     <link rel="stylesheet" href="/resources/css/base/style.css">
 </head>
 
-<body style="height:100vh; max-height: 100vh; margin:0; ">
+<body style="height:100vh; max-height: 100vh; margin:0;">
     <img src="..\resources\immagini\LogoNoBG.png">
-    <div style=" 	
-            display: flex;
-            flex-direction: column; 	
-            flex-wrap: wrap;        	
-            justify-content: center;	
-            align-items: center;">
+    <div style="display: flex;
+            flex-direction: column;	
+            height:  calc(100% - 140px);
+            ">            
         <div style="margin:auto">
             <div id="btnLog" >
                 <!-- <p>hai gia un account:</p> -->

@@ -7,6 +7,7 @@
 }
 body {
     background-color: rgb(59, 59, 59);
+    
 }
 .login {
     width: 400px;
@@ -15,6 +16,7 @@ body {
     margin: 100px auto;
     border-radius: 2%;
     overflow: hidden;
+    margin-bottom:0;
 }
 .login h1 {
     text-align: center;
@@ -50,7 +52,7 @@ body {
     margin-bottom: 20px;
     padding: 0 15px;
 }
-
+ 
 .login form input[type="submit"] {
     width: 100%;
     padding: 15px;
@@ -62,6 +64,7 @@ body {
     color: rgb(59, 59, 59);
     transition: background-color 0.2s;
 }
+
 .login form input[type="submit"]:hover {
   background-color: rgb(225, 174, 57);
     transition: background-color 0.2s;
@@ -73,7 +76,7 @@ body {
 }
 
 .navtop {
-	background-color: rgb(59, 59, 59);
+	background-color:  rgb(59, 59, 59);
 	height: 60px;
 	width: 100%;
 	border: 0;
@@ -81,7 +84,7 @@ body {
 .navtop div {
 	display: flex;
 	margin: 0 auto;
-	max-width: 100%;
+	max-width: 1000px;
 	height: 100%;
 }
 .navtop div h1, .navtop div a {
@@ -112,7 +115,6 @@ body {
 .navElement{
     max-width: 150px;
     position: relative;
-    left: 70%;
 }
 
 .boxButton{
@@ -130,18 +132,19 @@ body.loggedin {
 }
 .content h2 {
 	margin: 0;
-	padding: 15px 0 25 0;
+	padding: 15px 0 25px 0;
 	font-size: 22px;
 	border-bottom: 1px solid #e0e0e3;
 	color: rgb(255, 204, 87);
     display: flex;
 }
-
 .content > p, .content > div {
 	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
     left: 0;
 	margin: 25px 0;
 	padding: 25px;
+    background-color: rgb(161, 161, 161);
+    border-radius: 5px;
 }
 .content > p table td, .content > div table td {
 	padding: 5px;
@@ -177,15 +180,15 @@ a:hover{
 }
 
 .center{
-    display: inline-block;
     align-content: center;
+    text-align: center;
 }
 
 .btnHome{
     width: 200px;
     height: 100px;
     background-color: rgb(255, 204, 87);
-    margin: 20px;
+    margin: 20px 0;
     border-radius: 5px;
     position: relative;
     top: 50%;
@@ -238,7 +241,7 @@ p{
 
 .cbox{
     border-radius: 7px;
-    background-color: rgb(195, 195, 195);;
+    background-color: rgb(195, 195, 195);
 }
 
 .window {
@@ -246,8 +249,8 @@ p{
     background-color: rgb(195, 195, 195);
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
     margin: 100px auto;
-    border-radius: 2%;
-    overflow: hidden;
+    border-radius: 7px;
+    overflow: visible;
 }
 .window h1 {
     text-align: center;
@@ -295,6 +298,7 @@ p{
     font-weight: bold;
     color: rgb(59, 59, 59);
     transition: background-color 0.2s;
+    border-radius: 0 0 7px 7px;
 }
 .window > form > input[type="submit"]:hover {
   background-color: rgb(225, 174, 57);
@@ -315,4 +319,3 @@ button{
     border-radius: 5px;
     border-color: rgb(255, 204, 87);
 }
-

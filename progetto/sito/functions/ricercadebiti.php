@@ -30,7 +30,7 @@ $stid = oci_parse($conn, 'SELECT * FROM "DEBTS" WHERE DESCRIPTION LIKE :descr AN
         . " -- "
         . oci_result($stid, "CREATED_AT")
         ."<br>"
-        ;
-    }
-    
+        ;
+    }
+    
 ?>

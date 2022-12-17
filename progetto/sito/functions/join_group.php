@@ -33,6 +33,9 @@ if($resp[0] != 1){
 	_UTILS_showMessage("Valori non validi!","Errore!");
 	exit;
 }
-echo "Group Joined!!";
+include_once($_SERVER['DOCUMENT_ROOT'] . "/functions/phpUtils.php");	
+_UTILS_showMessage("Gruppo Joinato!"," Ok!");
+	
+
 
 ?>
